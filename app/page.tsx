@@ -30,7 +30,7 @@ export default function Home() {
     <div className="font-sans min-h-screen p-8 sm:p-20 flex flex-col items-center gap-16">
       {/* Cabeçalho */}
       <header className="flex flex-col items-center gap-4">
-        <h1 className="text-3xl font-bold text-yellow-600">Loja de Donuts 🍩</h1>
+        <h1 className="text-3xl font-bold text-yellow-600">Loja de Donuts da Ellen🍩</h1>
         <p className="text-gray-600">Escolha seu donut favorito e aproveite!</p>
       </header>
 
