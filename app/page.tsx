@@ -1,5 +1,6 @@
 // app/page.tsx
-import Image from "next/image";
+'use client';
+import { useEffect } from "react";
 
 export default function Home() {
   const donuts = [
@@ -8,45 +9,58 @@ export default function Home() {
       name: "Donut Chocolate",
       description: "Delicioso donut com cobertura de chocolate.",
       price: "R$ 5,00",
-      image: "/donut-chocolate.png",
+      emoji: "🍫🍩",
     },
     {
       id: 2,
       name: "Donut Morango",
       description: "Donut recheado com creme de morango.",
       price: "R$ 5,50",
-      image: "/donut-morango.png",
+      emoji: "🍓🍩",
     },
     {
       id: 3,
       name: "Donut Caramelo",
       description: "Donut com cobertura de caramelo e amendoim.",
       price: "R$ 6,00",
-      image: "/donut-caramelo.png",
+      emoji: "🍯🍩",
     },
   ];
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://cdn.hmlbots.digitalcontact.cloud/webchat.js";
+    script.async = true;
+    script.onload = () => {
+      window.renderBotWidget(
+        "660c440dab86155a5de14e56",
+        {
+          var_title: "Loja de Donuts",
+          layout: {},
+        },
+        false,
+        false
+      );
+    };
+    document.body.appendChild(script);
+  }, []);
 
   return (
     <div className="font-sans min-h-screen p-8 sm:p-20 flex flex-col items-center gap-16">
       {/* Cabeçalho */}
       <header className="flex flex-col items-center gap-4">
-        <h1 className="text-3xl font-bold text-yellow-600">Loja de Donuts da Ellen🍩</h1>
+        <h1 className="text-3xl font-bold text-yellow-600">Loja de Donuts da Ellen 🍩</h1>
         <p className="text-gray-600">Escolha seu donut favorito e aproveite!</p>
       </header>
 
       {/* Lista de Donuts */}
-      <main className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 w-full max-w-6xl">
+      <main className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 w-full max-w-4xl">
         {donuts.map((donut) => (
           <div
             key={donut.id}
             className="p-4 border rounded shadow flex flex-col items-center hover:scale-105 transition-transform"
           >
-            <Image
-              src={donut.image}
-              alt={donut.name}
-              width={150}
-              height={150}
-            />
+            <div className="text-6xl">{donut.emoji}</div>
             <h2 className="mt-2 font-semibold text-lg">{donut.name}</h2>
             <p className="text-sm text-gray-600 text-center">{donut.description}</p>
             <p className="mt-1 font-bold">{donut.price}</p>
@@ -56,29 +70,6 @@ export default function Home() {
           </div>
         ))}
       </main>
-
-      {/* Widget do Webchat */}
-      <div id="webchat-container" className="fixed bottom-4 right-4 z-50">
-        <script
-          src="https://cdn.hmlbots.digitalcontact.cloud/webchat.js"
-          async
-        ></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.renderBotWidget(
-                '660c440dab86155a5de14e56',
-                {
-                  var_title: "Loja de Donuts",
-                  layout: {}
-                },
-                false,
-                false
-              );
-            `,
-          }}
-        />
-      </div>
 
       {/* Footer */}
       <footer className="mt-16 text-sm text-gray-500">
