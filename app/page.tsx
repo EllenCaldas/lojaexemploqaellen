@@ -27,7 +27,7 @@ export default function Home() {
     script.async = true;
     script.onload = () => {
       window.renderBotWidget(
-        "660c440dab86155a5de14e56",
+        "68d192e3bf69c8ad1814a5e8",
         { var_title: "Loja de Donuts", layout: {} },
         false,
         false
