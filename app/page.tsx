@@ -1,13 +1,11 @@
-// app/page.tsx
 'use client';
 import { useEffect } from "react";
 
-// Declare a função no tipo global do Window
 declare global {
   interface Window {
     renderBotWidget: (
       botId: string,
-      options: any,
+      options?: any,
       resetSession?: boolean,
       customElementId?: boolean | string
     ) => void;
@@ -22,18 +20,25 @@ export default function Home() {
   ];
 
   useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://cdn.hmlbots.digitalcontact.cloud/webchat.js";
-    script.async = true;
-    script.onload = () => {
-      window.renderBotWidget(
-        "68d192e3bf69c8ad1814a5e8",
-        { var_title: "Loja de Donuts", layout: {} },
-        false,
-        false
-      );
-    };
-    document.body.appendChild(script);
+    const scripts = [
+      "https://app.hmlbots.digitalcontact.cloud/cdn/libs/purify.min.js",
+      "https://app.hmlbots.digitalcontact.cloud/cdn/libs/showdown.min.js",
+      "https://app.hmlbots.digitalcontact.cloud/cdn/libs/axios.js",
+      "https://app.hmlbots.digitalcontact.cloud/cdn/libs/socket.io.js",
+      "https://app.hmlbots.digitalcontact.cloud/cdn/webchat/webchat.js",
+    ];
+
+    scripts.forEach((src, index) => {
+      const script = document.createElement("script");
+      script.src = src;
+      script.async = true;
+      if (index === scripts.length - 1) {
+        script.onload = () => {
+          window.renderBotWidget("68d192e3bf69c8ad1814a5e8");
+        };
+      }
+      document.body.appendChild(script);
+    });
   }, []);
 
   return (
