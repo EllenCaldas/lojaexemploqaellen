@@ -20,6 +20,13 @@ export default function Home() {
   ];
 
   useEffect(() => {
+    // adiciona o CSS do widget
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "https://app.hmlbots.digitalcontact.cloud/cdn/webchat/webchat.v2.css";
+    document.head.appendChild(link);
+
+    // adiciona os scripts do widget
     const scripts = [
       "https://app.hmlbots.digitalcontact.cloud/cdn/libs/purify.min.js",
       "https://app.hmlbots.digitalcontact.cloud/cdn/libs/showdown.min.js",
@@ -34,6 +41,7 @@ export default function Home() {
       script.async = true;
       if (index === scripts.length - 1) {
         script.onload = () => {
+          // inicia o bot
           window.renderBotWidget("68d192e3bf69c8ad1814a5e8");
         };
       }
@@ -50,12 +58,17 @@ export default function Home() {
 
       <main className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 w-full max-w-4xl">
         {donuts.map((donut) => (
-          <div key={donut.id} className="p-4 border rounded shadow flex flex-col items-center hover:scale-105 transition-transform">
+          <div
+            key={donut.id}
+            className="p-4 border rounded shadow flex flex-col items-center hover:scale-105 transition-transform"
+          >
             <div className="text-6xl">{donut.emoji}</div>
             <h2 className="mt-2 font-semibold text-lg">{donut.name}</h2>
             <p className="text-sm text-gray-600 text-center">{donut.description}</p>
             <p className="mt-1 font-bold">{donut.price}</p>
-            <button className="mt-2 px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600">Comprar</button>
+            <button className="mt-2 px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600">
+              Comprar
+            </button>
           </div>
         ))}
       </main>
